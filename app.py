@@ -154,5 +154,6 @@ def get_route_name(route_number):
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5001))
-    app.run(host='0.0.0.0', port=port)
+    # Ensure the directory exists for saving cropped images
+    os.makedirs('cropped_images', exist_ok=True)
+    app.run(host='0.0.0.0', port=9090, debug=True)
