@@ -9,7 +9,7 @@ import os
 import random
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for cross-origin requests
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
 
 # Load the OCR route dictionary for bus route detection
 model_dir = 'model'
@@ -156,4 +156,6 @@ def get_route_name(route_number):
 if __name__ == '__main__':
     # Ensure the directory exists for saving cropped images
     os.makedirs('cropped_images', exist_ok=True)
-    app.run(host='0.0.0.0', port=9090, debug=True)
+    port = int(os.environ.get("PORT", 9090))  # Use PORT environment variable, default to 9090
+    app.run(host='0.0.0.0', port=port, debug=True)
+
