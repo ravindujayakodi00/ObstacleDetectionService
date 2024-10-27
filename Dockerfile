@@ -25,6 +25,10 @@ COPY . .
 # Expose the port your app will run on
 EXPOSE 8080
 
+# Set environment variables to prevent GPU checks
+ENV CUDA_VISIBLE_DEVICES="-1"
+ENV TORCH_CUDA_AVAILABLE=0
+
 # Set an environment variable for the port, defaulting to 8080
 ENV PORT=8080
 
