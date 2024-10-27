@@ -11,6 +11,11 @@ import random
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
 
+# Default route to check if the server is running
+@app.route('/', methods=['GET'])
+def server_up():
+    return jsonify({"status": "Server is running"}), 200
+
 # Load the OCR route dictionary for bus route detection
 model_dir = 'model'
 with open(os.path.join(model_dir, 'route_dict.pkl'), 'rb') as f:
@@ -158,4 +163,3 @@ if __name__ == '__main__':
     os.makedirs('cropped_images', exist_ok=True)
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
-
